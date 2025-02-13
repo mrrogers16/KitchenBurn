@@ -1,17 +1,17 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ContainerCounter : BaseCounter
 {
 
+    public event EventHandler OnPlayerGrabbedObject;
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     public override void Interact(Player player)
     {
-        // If nothings there
-        if (!HasKitchenObject())
-        {   // Create kitchen object using prefab at spec'ed point
-            Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
-            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
-        }
+        Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
+        kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+        OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
     }
 }
