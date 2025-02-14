@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class ClearCounter : BaseCounter
+public class CuttingCounter : BaseCounter
 {
-
-    [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     public override void Interact(Player player)
     {
-        if (!HasKitchenObject())
+         if (!HasKitchenObject())
         {
             // There is no KitchenObject here
             if (player.HasKitchenObject())
